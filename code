@@ -1,0 +1,25 @@
+#! python3
+# sel2.py - Takes your email and password to log-in to your yahoo email.
+
+from selenium import webdriver
+import time
+
+def my_func(take_em, take_pw):
+    browser = webdriver.Firefox()
+    browser.get('https://mail.yahoo.com')
+    emailElem = browser.find_element_by_id('login-username')
+    emailElem.send_keys(take_em)
+    emailElem.submit()
+    time.sleep(5)
+    passwordElem = browser.find_element_by_id('login-passwd')
+    passwordElem.send_keys(take_pw)
+    button_login = browser.find_elements_by_id('login-signin')[0]
+    button_login.click()
+    
+def test_it(*args):
+	my_func(*args)
+	
+if __name__ == '__main__':
+	email = input("Please add your email: ")
+	passw = input("Please add your password: ")
+	test_it(email, passw)
